@@ -11,6 +11,6 @@ When('I rquest a list of issues for the {string} repository', async (repositoryN
     response = await axios.get(url);
 });
 Then('I should find at least {string} result', async (requestResult) => {
-    console.log(response.data.length);
-    assert(response.data.length > requestResult, 'No issues were found');
+    const expectMinIssue = parseInt(requestResult, 10);
+    assert(response.data.length >= expectMinIssue,`Expected at least ${expectMinIssue} issues, but found ${response.data.length}` );
 });
